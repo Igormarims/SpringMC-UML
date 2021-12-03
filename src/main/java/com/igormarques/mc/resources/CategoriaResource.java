@@ -14,6 +14,7 @@ import com.igormarques.mc.services.CategoriaService;
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
+	
 	@Autowired
 	private CategoriaService service;
 
@@ -21,7 +22,7 @@ public class CategoriaResource {
 	public ResponseEntity<Categoria> buscar(@PathVariable Integer id) {
 	     return ResponseEntity.ok().body( service.buscar(id)); 
 	}
-	
-	
+
+
 	
 }
