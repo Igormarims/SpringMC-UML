@@ -27,8 +27,8 @@ import com.igormarques.mc.repositories.ProdutoRepository;
 public class SpringmcApplication implements CommandLineRunner
  {
 
-	@Autowired
-	private	CategoriaRepository repositorio;
+	    @Autowired
+	    private	CategoriaRepository repositorio;
 		
 		@Autowired
 		private ProdutoRepository prod;
