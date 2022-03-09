@@ -2,6 +2,8 @@ package com.igormarques.mc;
 
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,20 @@ import com.igormarques.mc.domain.Cidade;
 import com.igormarques.mc.domain.Cliente;
 import com.igormarques.mc.domain.Endereco;
 import com.igormarques.mc.domain.Estado;
+import com.igormarques.mc.domain.Pagamento;
+import com.igormarques.mc.domain.PagamentoComBoleto;
+import com.igormarques.mc.domain.PagamentoComCartao;
+import com.igormarques.mc.domain.Pedido;
 import com.igormarques.mc.domain.Produto;
+import com.igormarques.mc.domain.enums.EstadoPagamento;
 import com.igormarques.mc.domain.enums.TipoCliente;
 import com.igormarques.mc.repositories.CategoriaRepository;
 import com.igormarques.mc.repositories.CidadeRepository;
 import com.igormarques.mc.repositories.ClienteRepository;
 import com.igormarques.mc.repositories.EnderecoRepository;
 import com.igormarques.mc.repositories.EstadoRepository;
+import com.igormarques.mc.repositories.PagamentoRepository;
+import com.igormarques.mc.repositories.PedidoRepository;
 import com.igormarques.mc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -44,11 +53,16 @@ public class SpringmcApplication implements CommandLineRunner
 		
 		@Autowired
 		private EnderecoRepository endereco;
+		
+		@Autowired
+		private PedidoRepository pedidoRepository;
+		
+		@Autowired
+		private PagamentoRepository pagamentoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringmcApplication.class, args);
 	}
-
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -100,8 +114,25 @@ public class SpringmcApplication implements CommandLineRunner
 	    
 	    endereco.saveAll(Arrays.asList(e1,e2));
 	
+	   
+	    
+	       Pedido ped1 = new Pedido(null ,null,e1,cli1);
+	       Pedido ped2 = new Pedido(null,null , e2, cli1);
 	
+	       Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+	       ped1.setPagamento(pagto1);
+	       
+	       Pagamento pagto2 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE,null , ped2, null);
+	       ped2.setPagamento(pagto2);
+	
+	       cli1.getPedido().addAll(Arrays.asList(ped1,ped2));      
+	
+	       pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+	
+	       pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+	
+	 
 	}
+ }
 
-	
-}
+

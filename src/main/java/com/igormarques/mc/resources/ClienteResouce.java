@@ -11,7 +11,7 @@ import com.igormarques.mc.domain.Cliente;
 import com.igormarques.mc.services.ClienteService;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 public class ClienteResouce {
 
 	@Autowired
