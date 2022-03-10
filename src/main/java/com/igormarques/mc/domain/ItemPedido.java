@@ -4,25 +4,27 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
-public class ItemPedido implements Serializable{
+@Entity
+public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private ItemPedidoPk id = new ItemPedidoPk();
-	
+
 	private Double desconto;
-	
+
 	private Integer quantidade;
-	
+
 	private Double preco;
-	
+
 	public ItemPedido() {
-		
+
 	}
 
 	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
-	
+
 		id.setPedido(pedido);
 		id.setProduto(produto);
 		this.desconto = desconto;
@@ -33,11 +35,11 @@ public class ItemPedido implements Serializable{
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-	
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
-	
+
 	public ItemPedidoPk getId() {
 		return id;
 	}
@@ -86,13 +88,5 @@ public class ItemPedido implements Serializable{
 		ItemPedido other = (ItemPedido) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
