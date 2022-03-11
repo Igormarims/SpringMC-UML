@@ -20,10 +20,15 @@ public class CategoriaService {
 		return obj.orElseThrow( () -> new ObjectNotFoundException
 				("Objeto não encontrado" + id + ",tipo:" 
 				+ Categoria.class.getName()));
-
-		
+                }
+	
+	public Categoria atualizar(Categoria categoria) {
+		categoria.setId(null);
+		Categoria categorianova = repo.save(categoria);
+		return categorianova;
 		
 	}
+	
 	
 
 }
