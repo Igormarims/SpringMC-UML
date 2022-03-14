@@ -2,6 +2,7 @@ package com.igormarques.mc.resources.exception;
 
 import java.io.Serializable;
 
+
 public class StandardError implements Serializable {
 	
 
